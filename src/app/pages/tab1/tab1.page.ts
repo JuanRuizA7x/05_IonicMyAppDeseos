@@ -15,21 +15,36 @@ export class Tab1Page {
   }
 
   async agregarLista() {
-    // this.router.navigateByUrl('/tabs/tab1/agregar');
 
     const alert = await this.alertController.create({
       header: 'Nueva Lista',
       inputs: [
         {
-          name: 'Titulo',
+          name: 'titulo',
           type: 'text',
           placeholder: 'Nombre de la lista'
         }
       ],
-      buttons: ['OK']
+      buttons: [{
+        text: 'Cancelar',
+        role: 'cancel',
+        handler: () => {}
+      },
+      {
+        text: 'Crear',
+        handler: ( data ) => {
+          if ( data.titulo.length === 0 ) {
+            return;
+          }
+
+          const listaId = this.deseosService.crearLista(data.titulo);
+          this.router.navigateByUrl(`/tabs/tab1/agregar/${listaId}`);
+        }
+      }]
     });
 
     await alert.present();
+
   }
 
 }

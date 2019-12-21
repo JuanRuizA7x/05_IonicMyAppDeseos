@@ -3,15 +3,15 @@
         <ion-buttons slot="start">
             <ion-back-button color="primary" defaultHref="/tabs/tab1"></ion-back-button>
         </ion-buttons>
-        <ion-title>Agregar lista</ion-title>
+        <ion-title>{{lista.titulo}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content color="dark">
     <ion-list>
         <ion-item color="dark">
-            <ion-label position="floating">Nombre de la lista</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-label position="floating">Nuevo ítem</ion-label>
+            <ion-input type="text" [(ngModel)]="nombreItem" (keyup.enter)="agregarItem()"></ion-input>
         </ion-item>
     </ion-list>
 
@@ -19,9 +19,9 @@
         <ion-list-header color="dark">
             <ion-label>Tareas por hacer</ion-label>
         </ion-list-header>
-        <ion-item color="dark">
-            <ion-checkbox color="primary" slot="start"></ion-checkbox>
-            <ion-label>Tarea 1</ion-label>
+        <ion-item color="dark" *ngFor="let item of lista.items">
+            <ion-checkbox color="primary" slot="start" [(ngModel)]="item.completado"></ion-checkbox>
+            <ion-label>{{item.descripcion}}</ion-label>
         </ion-item>
     </ion-list>
 </ion-content>
