@@ -1,0 +1,11 @@
+<ion-list>
+    <ion-item color="dark" *ngFor="let item of deseosService.listas" detail (click)="listaSeleccionada(item.id)">
+        <ion-label>{{item.titulo}}</ion-label>
+        <ng-container *ngIf="item.items.length != 1; else elseTemplate">
+            <ion-note color="primary" slot="end">{{item.items.length}} ítems</ion-note>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <ion-note color="primary" slot="end">{{item.items.length}} ítem</ion-note>
+        </ng-template>
+    </ion-item>
+</ion-list>
