@@ -38,4 +38,26 @@ export class DeseosService {
     }
   }
 
+  borrarLista( listaId: number) {
+    let i = 0;
+
+    while ( this.listas[i].id !== listaId ) {
+      i++;
+    }
+
+    this.listas.splice(i, 1);
+
+    this.guardarStorage();
+
+  }
+
+  modificarNombreLista( listaId: number, nombre: string ) {
+    this.listas.forEach(element => {
+      if ( element.id === listaId ) {
+        element.titulo = nombre;
+        this.guardarStorage();
+      }
+    });
+  }
+
 }
